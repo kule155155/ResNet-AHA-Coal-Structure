@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```
 ## Dataset Statement
 Due to geological data confidentiality restrictions, raw field ERMI logging data cannot be publicly released.
-The folder demo_synthetic_dataset contains synthetic demo images for testing and reproducing the model pipeline.
+The folder `demo_synthetic_dataset` contains synthetic demo images for testing and reproducing the model pipeline.
 The directory structure strictly matches the reading path in training code:
 ```
 demo_synthetic_dataset/
@@ -34,11 +34,11 @@ demo_synthetic_dataset/
    └─ 3_糜棱
 ```
 ## Quick Start
-## 1.Preprocess synthetic dataset
+1. Preprocess synthetic dataset
 ```bash
 python make_demo_dataset.py
 ```
-## 2.Train ResNet-AHA classification model
+2. Train ResNet-AHA classification model
 ```bash
 python train_resnet_aha.py
 ```
