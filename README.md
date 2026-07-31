@@ -34,7 +34,7 @@ demo_synthetic_dataset/
    └─ 3_mylonitic
 ```
 
-##Input and Output
+## Input and Output
 Input
 Preprocessed single-channel grayscale ERMI logging images. Images are arranged in category-specific folders for training, validation and testing.
 
