@@ -41,7 +41,7 @@ Run `python make_demo_dataset.py` to generate synthetic images before model trai
 ## Input and Output
 
 ### Input
-Preprocessed single-channel grayscale ERMI logging images. Images are organized into in category-specific folders for training, validation and testing.
+Preprocessed single-channel grayscale ERMI logging images. Images are organized into category-specific folders for training, validation and testing.
 
 ### Output
 1. Optimized model checkpoint `ResNet_AHA_best.pth` saved in the `models/` folder.
