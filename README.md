@@ -43,7 +43,11 @@ Preprocessed single-channel grayscale ERMI logging images. Images are arranged i
 2. Quantitative metrics (Accuracy, Precision, Recall, F1-Score) and confusion matrix printed in the console.
 3. Training loss and accuracy curve image saved as training_curves.png.
 ## Quick Start
-Train ResNet-AHA classification model
+1. Generate synthetic demo dataset
+```bash
+python make_demo_dataset.py
+```
+2. Train ResNet-AHA classification model
 ```bash
 python train_resnet_aha.py
 ```
