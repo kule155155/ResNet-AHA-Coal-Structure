@@ -33,6 +33,15 @@ demo_synthetic_dataset/
    ├─ 2_granulated
    └─ 3_mylonitic
 ```
+
+##Input and Output
+Input
+Preprocessed single-channel grayscale ERMI logging images. Images are arranged in category-specific folders for training, validation and testing.
+
+Output
+Optimized model checkpoint ResNet_AHA_best.pth saved in the models/ folder.
+Quantitative metrics (Accuracy, Precision, Recall, F1-Score) and confusion matrix printed in the console.
+Training loss and accuracy curve image saved as training_curves.png.
 ## Quick Start
 1. Preprocess synthetic dataset
 ```bash
