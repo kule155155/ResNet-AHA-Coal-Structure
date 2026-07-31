@@ -27,8 +27,11 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 MODEL_SAVE_DIR = os.path.join(os.path.dirname(__file__), "models")
 os.makedirs(MODEL_SAVE_DIR, exist_ok=True)
-# Unified naming consistent with journal manuscript
-CLASS_NAMES = ["primary coal", "cataclastic coal", "granulated coal", "mylonitic coal"]
+
+# Folder directory names (consistent with make_demo_dataset.py)
+DIR_CLASS_NAMES = ["0_primary", "1_cataclastic", "2_granulated", "3_mylonitic"]
+# Display names for log output and evaluation report
+SHOW_CLASS_NAMES = ["primary coal", "cataclastic coal", "granulated coal", "mylonitic coal"]
 
 
 # ==========================================
@@ -159,7 +162,7 @@ class ResNet_AHA(nn.Module):
         x = self.layer1(x)
         x = self.se1(x)
 
-        x = self.layer2
+        x = self.layer2(x)
         x = self.triplet2(x)
 
         x = self.layer3(x)
@@ -223,7 +226,7 @@ if __name__ == '__main__':
         return stats
 
     train_stats = count_files(os.path.join(DATA_DIR, 'train'))
-    val_stats = count_files(os.path.join(DATA_DIR, 'test'))
+    val_stats = count_files(os.path.join(DATA_DIR, 'val'))
     test_stats = count_files(os.path.join(DATA_DIR, 'test'))
 
     print("\n" + "=" * 80)
@@ -231,13 +234,13 @@ if __name__ == '__main__':
     print("-" * 80)
 
     grand_total = 0
-    for name in CLASS_NAMES:
-        t_c = train_stats.get(name, 0)
-        v_c = val_stats.get(name, 0)
-        ts_c = test_stats.get(name, 0)
+    for dir_name, show_name in zip(DIR_CLASS_NAMES, SHOW_CLASS_NAMES):
+        t_c = train_stats.get(dir_name, 0)
+        v_c = val_stats.get(dir_name, 0)
+        ts_c = test_stats.get(dir_name, 0)
         row_total = t_c + v_c + ts_c
         grand_total += row_total
-        print(f" {name:<24} | {t_c:<12} | {v_c:<10} | {ts_c:<12} | {row_total:<8}")
+        print(f" {show_name:<24} | {t_c:<12} | {v_c:<10} | {ts_c:<12} | {row_total:<8}")
 
     print("-" * 80)
     print(f" {'Total Samples':<24} | {len(train_dataset):<12} | {len(val_dataset):<10} | {len(test_dataset):<12} | {grand_total:<8}")
@@ -328,7 +331,6 @@ if __name__ == '__main__':
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
 
-    # Fixed bug: pass all_labels first, then all_preds
     acc = accuracy_score(all_labels, all_preds)
     precision = precision_score(all_labels, all_preds, average='macro', zero_division=0)
     recall = recall_score(all_labels, average='macro', zero_division=0)
@@ -343,16 +345,15 @@ if __name__ == '__main__':
     print("=" * 85)
 
     print("\nDetailed Classification Report:")
-    print(classification_report(all_labels, all_preds, target_names=CLASS_NAMES, digits=4))
+    print(classification_report(all_labels, all_preds, target_names=SHOW_CLASS_NAMES, digits=4))
 
     print("\nConfusion Matrix (True label \\ Predicted label):")
-    header = "True \\ Predict | " + " | ".join([f"{name:>18}" for name in CLASS_NAMES])
+    header = "True \\ Predict | " + " | ".join([f"{name:>18}" for name in SHOW_CLASS_NAMES])
     print("-" * len(header))
     print(header)
     print("-" * len(header))
-    # Fixed bug: CLASS → CLASS_NAMES
     for i, row in enumerate(cm):
-        name_str = CLASS_NAMES[i]
+        name_str = SHOW_CLASS_NAMES[i]
         row_data = " | ".join([f"{val:>18}" for val in row])
         print(f"{name_str:<24} | {row_data}")
     print("-" * len(header) + "\n")
@@ -376,7 +377,7 @@ if __name__ == '__main__':
 
     plt.subplot(1, 2, 2)
     plt.plot(history['train_acc'], label='Train Accuracy')
-    plt.plot(history['val_acc'], label='Best Epoch {best_epoch}')
+    plt.plot(history['val_acc'], label=f'Val Accuracy, Best Epoch {best_epoch}')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
     plt.legend()
