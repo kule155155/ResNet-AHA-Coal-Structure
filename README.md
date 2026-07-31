@@ -4,7 +4,7 @@
 This network embeds SE module and Triplet Attention into ResNet-18 to alleviate feature competition during multi-scale fusion, aiming to identify four types of coal body structures from grayscale logging images.
 
 ### Coal structure categories
-0_primary, 1_fractured, 2_granular, 3_mylonitic
+0_primary, 1_cataclastic, 2_granulated, 3_mylonitic
 
 ## Environment
 Install dependencies:
@@ -18,20 +18,20 @@ The directory structure strictly matches the reading path in training code:
 ```
 demo_synthetic_dataset/
 ├─ train
-│  ├─ 0_原生
-│  ├─ 1_碎裂
-│  ├─ 2_碎粒
-│  └─ 3_糜棱
+│  ├─ 0_primary
+│  ├─ 1_cataclastic
+│  ├─ 2_granulated
+│  └─ 3_mylonitic
 ├─ val
-│  ├─ 0_原生
-│  ├─ 1_碎裂
-│  ├─ 2_碎粒
-│  └─ 3_糜棱
+│  ├─ 0_primary
+│  ├─ 1_cataclastic
+│  ├─ 2_granulated
+│  └─ 3_mylonitic
 └─ test
-   ├─ 0_原生
-   ├─ 1_碎裂
-   ├─ 2_碎粒
-   └─ 3_糜棱
+   ├─ 0_primary
+   ├─ 1_cataclastic
+   ├─ 2_granulated
+   └─ 3_mylonitic
 ```
 ## Quick Start
 1. Preprocess synthetic dataset
