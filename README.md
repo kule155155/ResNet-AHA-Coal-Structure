@@ -14,8 +14,9 @@ pip install -r requirements.txt
 ## Dataset Statement
 Due to geological data confidentiality restrictions, raw field ERMI logging data cannot be publicly released.
 The folder `demo_synthetic_dataset` contains synthetic demo images for testing and reproducing the model pipeline.
+The synthetic data cannot represent the characteristics of actual coal body structures and is only used for code verification.
+
 The directory structure strictly matches the reading path in training code:
-```
 demo_synthetic_dataset/
 ├─ train
 │  ├─ 0_primary
@@ -33,6 +34,7 @@ demo_synthetic_dataset/
    ├─ 2_granulated
    └─ 3_mylonitic
 ```
+Run `python make_demo_dataset.py` to generate synthetic images before model training.
 
 ## Input and Output
 
