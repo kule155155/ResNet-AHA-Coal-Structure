@@ -38,7 +38,7 @@ demo_synthetic_dataset/
 ### Input
 Preprocessed single-channel grayscale ERMI logging images. Images are arranged in category-specific folders for training, validation and testing.
 
-Output
+### Output
 1. Optimized model checkpoint ResNet_AHA_best.pth saved in the models/ folder.
 2. Quantitative metrics (Accuracy, Precision, Recall, F1-Score) and confusion matrix printed in the console.
 3. Training loss and accuracy curve image saved as training_curves.png.
