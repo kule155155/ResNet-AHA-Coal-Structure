@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# ===== Project custom ignore =====
+demo_synthetic_dataset/
+models/*.pth
+models/*.png
